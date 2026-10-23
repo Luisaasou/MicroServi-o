@@ -1,0 +1,344 @@
+{
+  "info": {
+    "name": "ThinDesk - Chamados",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "chamadoId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1 - Abrir chamado (usuario)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "usuario",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "usuario123",
+              "type": "string"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/chamados",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "chamados"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"Impressora parada\",\n  \"descricao\": \"A impressora do financeiro não imprime\",\n  \"tipo\": \"Hardware\"\n}"
+        }
+      }
+    },
+    {
+      "name": "2 - Abrir chamado sem título (erro 400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "usuario",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "usuario123",
+              "type": "string"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/chamados",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "chamados"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"\",\n  \"descricao\": \"teste sem título\"\n}"
+        }
+      }
+    },
+    {
+      "name": "3 - Listar chamados do usuario",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "usuario",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "usuario123",
+              "type": "string"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/chamados/usuario/usuario",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "chamados",
+            "usuario",
+            "usuario"
+          ]
+        }
+      }
+    },
+    {
+      "name": "4 - Consultar chamado",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "usuario",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "usuario123",
+              "type": "string"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/chamados/{{chamadoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "chamados",
+            "{{chamadoId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "5 - Usuario tentando resolver (erro 403)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "usuario",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "usuario123",
+              "type": "string"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/chamados/{{chamadoId}}/resolver",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "chamados",
+            "{{chamadoId}}",
+            "resolver"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"solucao\": \"tentativa indevida\"\n}"
+        }
+      }
+    },
+    {
+      "name": "6 - Resolver chamado (tecnico)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "tecnico",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "tecnico123",
+              "type": "string"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/chamados/{{chamadoId}}/resolver",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "chamados",
+            "{{chamadoId}}",
+            "resolver"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"solucao\": \"Troca do cartucho e reinício do spooler\"\n}"
+        }
+      }
+    },
+    {
+      "name": "7 - Resolver de novo (erro 409)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "tecnico",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "tecnico123",
+              "type": "string"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/chamados/{{chamadoId}}/resolver",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "chamados",
+            "{{chamadoId}}",
+            "resolver"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"solucao\": \"outra solução\"\n}"
+        }
+      }
+    },
+    {
+      "name": "8 - Consultar chamado resolvido",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "usuario",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "usuario123",
+              "type": "string"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/chamados/{{chamadoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "chamados",
+            "{{chamadoId}}"
+          ]
+        }
+      }
+    }
+  ]
+}
